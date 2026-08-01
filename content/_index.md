@@ -31,10 +31,14 @@ The host port is the instance's identity. The policy below is pegged's product c
 
 Trust auth (no password) unless `--password` is set; loopback-only binding unless `--listen` widens it; `postgres:17-alpine`; tuned dev server settings via `postgres -c` flags — no config files anywhere. Port resolution: positional argument, then `PGPORT`, then 5432 (a conflicting argument and `PGPORT` is an error, never a silent pick).
 
+## Locked down by construction
+
+Every instance container runs as the image's `postgres` user for its entire life (no root phase), with a read-only root filesystem, tmpfs-only scratch, all Linux capabilities dropped, and privilege escalation disabled. Database authentication is separate and stays your choice (trust by default, `--password` when you want one) — the container lockdown never depends on it. A side effect worth knowing: `docker exec -it <container> psql` connects as `postgres` directly.
+
 ## Snapshots — major-version bound
 
 Snapshots are physical PGDATA clones taken while the database is stopped. They restore only onto the same PostgreSQL major; `pegged start --snapshot <name>` refuses a mismatch unless forced. Restores clone the snapshot — the stored snapshot itself is never mounted.
 
 ## Environment
 
-Every flag reads `PEGGED_<FLAG>`; `--port` also honors `PGPORT`. All containers and volumes carry `pegged.*` labels — discovery is label-based, so pegged coexists with other tools (and other go-pgdocker namespaces) on the same daemon.
+Every flag reads `PEGGED_<FLAG>`; `--port` also honors `PGPORT`. All containers and volumes carry `pegged.*` labels — discovery is label-based, so pegged coexists with other tools (and other go-pgdocker namespaces) on the same daemon. Every container, data volume, and snapshot volume also carries a `pegged.version` provenance label recording which pegged created it; on a durable port a reused volume keeps its original creator's version while the container carries the current one — each resource records its own creator.
