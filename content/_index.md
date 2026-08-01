@@ -15,7 +15,7 @@ $ pegged stop 5498
 
 | Command | Does |
 | --- | --- |
-| `pegged start [port]` | Start an instance; waits for `pg_isready`; prints the instance with a ready DSN. Flags: `--image`, `--database`, `--user`, `--password`, `--snapshot`, `--volume reuse\|fresh`, `--retain keep\|remove`, `--listen`, `--init-sql`, `--platform`. |
+| `pegged start [port]` | Start an instance; waits for `pg_isready`; prints the instance record (name, port, volume, labels). No connection URL is derived — roles, databases, and passwords are yours, set by `--init-sql` and later administration. Flags: `--image`, `--database`, `--user`, `--password`, `--snapshot`, `--volume reuse\|fresh`, `--retain keep\|remove`, `--listen`, `--init-sql`, `--platform`. |
 | `pegged stop [port]` | Stop and apply volume retention (`--retain`, `--grace`). |
 | `pegged inspect [port]` | One port's container and volumes. |
 | `pegged list` | Every pegged-managed port. |
