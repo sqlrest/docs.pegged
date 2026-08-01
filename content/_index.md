@@ -37,7 +37,7 @@ Every instance container runs as the image's `postgres` user for its entire life
 
 ## Snapshots — major-version bound
 
-Snapshots are physical PGDATA clones taken while the database is stopped. They restore only onto the same PostgreSQL major; `pegged start --snapshot <name>` refuses a mismatch unless forced. Restores clone the snapshot — the stored snapshot itself is never mounted.
+Snapshots are physical PGDATA clones taken while the database is stopped. They restore only onto the same PostgreSQL major; `pegged start --snapshot <name>` refuses a major mismatch. Restores clone the snapshot — the stored snapshot itself is never mounted.
 
 ## Environment
 
