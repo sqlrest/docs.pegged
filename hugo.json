@@ -1,0 +1,21 @@
+{
+  "baseURL": "https://sqlrest.github.io/docs.pegged/",
+  "title": "pegged",
+  "publishDir": "_site",
+  "enableRobotsTXT": true,
+  "markup": {
+    "goldmark": {
+      "renderHooks": {
+        "link": {
+          "useEmbedded": "fallback"
+        },
+        "image": {
+          "useEmbedded": "fallback"
+        }
+      }
+    }
+  },
+  "params": {
+    "description": "PostgreSQL database lifecycle CLI."
+  }
+}
