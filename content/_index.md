@@ -5,10 +5,10 @@ title: pegged
 **pegged** manages local PostgreSQL databases in Docker — the sqlrest development database tool. It is a thin shell over [go-pgdocker](https://gomatic.github.io/docs.go-pgdocker/); all lifecycle behavior lives in the library.
 
 ```console
-$ pegged start 5498
-$ psql "postgres://postgres@127.0.0.1:5498/postgres?sslmode=disable"
-$ pegged snapshot create 5498 baseline   # stop first: snapshots are cold PGDATA clones
-$ pegged stop 5498
+pegged start 5498
+psql "postgres://postgres@127.0.0.1:5498/postgres?sslmode=disable"
+pegged snapshot create 5498 baseline   # stop first: snapshots are cold PGDATA clones
+pegged stop 5498
 ```
 
 ## Commands
